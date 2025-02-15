@@ -57,9 +57,9 @@ if __name__ == '__main__':
             for con in connections:
                 all_latencies['fixed-rate'][path_choice][iteration].append(con.latency*1000)
                 all_snrs['fixed-rate'][path_choice][iteration].append(con.snr)
-                all_bit_rates['fixed-rate'][path_choice][iteration].append(con.bit_rate)
+                all_bit_rates['fixed-rate'][path_choice][iteration].append(con.bit_rate*10**(-9))
                 capacity_sum += con.bit_rate
-            capacity_total['fixed-rate'][path_choice][iteration]=capacity_sum
+            capacity_total['fixed-rate'][path_choice][iteration]=capacity_sum*10**(-9)
             blocking_percentual=blocking/iterations*100
             blocking_percentuals['fixed-rate'][path_choice][iteration]=blocking_percentual
             iters['fixed-rate'][path_choice][iteration]=iterations
@@ -86,9 +86,9 @@ if __name__ == '__main__':
             for con in connections:
                 all_latencies['flex-rate'][path_choice][iteration].append(con.latency*1000)
                 all_snrs['flex-rate'][path_choice][iteration].append(con.snr)
-                all_bit_rates['flex-rate'][path_choice][iteration].append(con.bit_rate)
+                all_bit_rates['flex-rate'][path_choice][iteration].append(con.bit_rate*10**(-9))
                 capacity_sum+=con.bit_rate
-            capacity_total['flex-rate'][path_choice][iteration]=capacity_sum
+            capacity_total['flex-rate'][path_choice][iteration]=capacity_sum*10**(-9)
             blocking_percentual=blocking/iterations*100
             blocking_percentuals['flex-rate'][path_choice][iteration]=blocking_percentual
             iters['flex-rate'][path_choice][iteration] = iterations
@@ -115,9 +115,9 @@ if __name__ == '__main__':
             for con in connections:
                 all_latencies['shannon'][path_choice][iteration].append(con.latency*1000)
                 all_snrs['shannon'][path_choice][iteration].append(con.snr)
-                all_bit_rates['shannon'][path_choice][iteration].append(con.bit_rate)
+                all_bit_rates['shannon'][path_choice][iteration].append(con.bit_rate*10**(-9))
                 capacity_sum += con.bit_rate
-            capacity_total['shannon'][path_choice][iteration]=capacity_sum
+            capacity_total['shannon'][path_choice][iteration]=capacity_sum*10**(-9)
             blocking_percentual=blocking/iterations*100
             blocking_percentuals['shannon'][path_choice][iteration]=blocking_percentual
             iters['shannon'][path_choice][iteration] = iterations
@@ -262,21 +262,21 @@ if __name__ == '__main__':
     print(gsnr_max['shannon']['latency'])
     
     """
-    print_subplot(OUTPUT_FOLDER, transceiver_strategies, 'latency', gsnr_min, gsnr_avg, gsnr_max, 'SNR')
-    print_subplot(OUTPUT_FOLDER, transceiver_strategies, 'latency', latency_min, latency_avg, latency_max, 'Latency')
-    print_subplot(OUTPUT_FOLDER, transceiver_strategies, 'latency', capacity_min, capacity_avg, capacity_max, 'Bit Rate')
-    print_subplot(OUTPUT_FOLDER, transceiver_strategies, 'snr', gsnr_min, gsnr_avg, gsnr_max, 'SNR')
-    print_subplot(OUTPUT_FOLDER, transceiver_strategies, 'snr', latency_min, latency_avg, latency_max, 'Latency')
-    print_subplot(OUTPUT_FOLDER, transceiver_strategies, 'snr', capacity_min, capacity_avg, capacity_max, 'Bit Rate')
+    print_subplot(OUTPUT_FOLDER, transceiver_strategies, 'latency', gsnr_min, gsnr_avg, gsnr_max, 'SNR', 'dB')
+    print_subplot(OUTPUT_FOLDER, transceiver_strategies, 'latency', latency_min, latency_avg, latency_max, 'Latency', 'ms')
+    print_subplot_c(OUTPUT_FOLDER, transceiver_strategies, 'latency', capacity_min, capacity_avg, capacity_max, 'Bit Rate', capacity_total)
+    print_subplot(OUTPUT_FOLDER, transceiver_strategies, 'snr', gsnr_min, gsnr_avg, gsnr_max, 'SNR', 'dB')
+    print_subplot(OUTPUT_FOLDER, transceiver_strategies, 'snr', latency_min, latency_avg, latency_max, 'Latency', 'ms')
+    print_subplot_c(OUTPUT_FOLDER, transceiver_strategies, 'snr', capacity_min, capacity_avg, capacity_max, 'Bit Rate', capacity_total)
 
     plot_blocking_percentage(OUTPUT_FOLDER, transceiver_strategies,iters, blocking_percentuals, 'latency')
     plot_blocking_percentage(OUTPUT_FOLDER, transceiver_strategies,iters, blocking_percentuals, 'snr')
 
-    plot_capacities_total(OUTPUT_FOLDER, transceiver_strategies, capacity_total, 'latency' )
-    plot_capacities_total(OUTPUT_FOLDER, transceiver_strategies, capacity_total, 'snr')
+    #plot_capacities_total(OUTPUT_FOLDER, transceiver_strategies, capacity_total, 'latency' )
+    #plot_capacities_total(OUTPUT_FOLDER, transceiver_strategies, capacity_total, 'snr')
 
-    plot_bit_rate_gsnr(OUTPUT_FOLDER, transceiver_strategies, all_bit_rates, all_snrs, 'latency' )
-    plot_bit_rate_gsnr(OUTPUT_FOLDER, transceiver_strategies, all_bit_rates, all_snrs, 'snr')
+    #plot_bit_rate_gsnr(OUTPUT_FOLDER, transceiver_strategies, all_bit_rates, all_snrs, 'latency' )
+    #plot_bit_rate_gsnr(OUTPUT_FOLDER, transceiver_strategies, all_bit_rates, all_snrs, 'snr')
 
 
 

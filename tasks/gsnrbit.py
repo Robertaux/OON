@@ -49,3 +49,15 @@ plt.title("Bit Rate vs. GSNR for Different Strategies", fontsize=14)
 plt.legend()
 plt.grid(True)
 plt.show()
+
+
+
+
+
+
+
+
+
+
+
+
